@@ -56,6 +56,24 @@
 
   programs.alacritty = {
     enable = true;
+    # To see default options:
+    # less $(nix-build '<nixpkgs>' -A alacritty.src)/alacritty.yml
+    settings = {
+      font = {
+        normal.family = "Fira Code";
+        bold.family = "Fira Code";
+
+        italic.family = "Inconsolata";
+        bold_italic.family = "Inconsolata";
+
+        size = 20.0;
+      };
+      shell = {
+        program = "${pkgs.tmux}/bin/tmux";
+        args = [ "new-session" "-A" "-s" "alacritty" ];
+      };
+      window.startup_mode = "Maximized";
+    };
   };
 
   programs.tmux = {
@@ -179,7 +197,6 @@
         show-read-feeds no
         text-width 120
       '';
-      "alacritty/alacritty.yml".source = ./alacritty.yml;
     };
   };
 
