@@ -24,7 +24,7 @@
   # TODO: make darwin-specific things check platform
 
   home.packages = with pkgs;
-    [ alacritty fd gitAndTools.hub gnugrep jq ripgrep youtube-dl taskwarrior vscode ]
+    [ fd gitAndTools.hub gnugrep jq ripgrep youtube-dl taskwarrior vscode ]
     ++ [ macvim ];
 
   home.activation = {
@@ -52,6 +52,10 @@
     EDITOR = "vim";
     VISUAL = "mvim -f";
     GIT_EDITOR = "mvim -f --nomru -c 'au VimLeave * !open -a Alacritty'";
+  };
+
+  programs.alacritty = {
+    enable = true;
   };
 
   programs.tmux = {
