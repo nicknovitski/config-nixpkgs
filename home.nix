@@ -25,6 +25,7 @@
 
   home.packages = with pkgs;
     [ fd gitAndTools.hub gnugrep jq ripgrep youtube-dl taskwarrior vscode ]
+    ++ [ fira-code inconsolata ]
     ++ [ macvim ];
 
   home.activation = {
@@ -45,6 +46,20 @@
         $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
         $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
       done
+    '';
+    copyFonts = let
+      fonts = pkgs.buildEnv {
+        name = "home-manager-fonts";
+        paths = config.home.packages;
+        pathsToLink = "/share/fonts/truetype";
+      };
+    in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      baseDir="$HOME/Library/Fonts/Home Manager Fonts"
+      if [ -d "$baseDir" ]; then
+        rm -rf "$baseDir"
+      fi
+      mkdir -p "$baseDir"
+      $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -f ${fonts}/share/fonts/truetype{/,/**/}*.ttf "$baseDir"
     '';
   };
 
