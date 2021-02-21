@@ -21,8 +21,6 @@
 
   nixpkgs.config = import ./config.nix;
 
-  # TODO: make darwin-specific things check platform
-
   home.packages = with pkgs;
     [ fd gitAndTools.hub gnugrep jq ripgrep youtube-dl taskwarrior vscode ]
     ++ [ fira-code inconsolata ]
@@ -166,7 +164,6 @@
   #  '';
   #};
 
-  # Can't do this while install-tools globally installs direnv
   programs.direnv = {
     enable = true;
     config = {
