@@ -22,7 +22,7 @@
   nixpkgs.config = import ./config.nix;
 
   home.packages = with pkgs;
-    [ fd gitAndTools.hub gnugrep jq ripgrep youtube-dl taskwarrior vscode ]
+    [ fd gitAndTools.hub gnugrep jq ripgrep youtube-dl taskwarrior tasksh vscode ]
     ++ [ fira-code inconsolata ]
     ++ [ macvim ];
 
@@ -86,6 +86,26 @@
         args = [ "new-session" "-A" "-s" "alacritty" ];
       };
       window.startup_mode = "Maximized";
+    };
+  };
+
+  programs.taskwarrior = {
+    enable = true;
+    colorTheme = "solarized-dark-256";
+    config = {
+      taskd = {
+        server = "freecinc.com:53589";
+        key = "~/.local/share/task/freecinc.key.pem";
+        certificate = "~/.local/share/task/freecinc.cert.pem";
+        ca = "~/.local/share/task/freecinc.ca.pem";
+        # NOTE: the results of this are world-readable, but so was my task
+        # config file before using home-manager, so...
+        credentials =
+          let
+            envCreds = builtins.getEnv "FREECINC_CREDENTIALS";
+          in
+          assert envCreds != ""; envCreds;
+      };
     };
   };
 
