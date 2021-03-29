@@ -192,9 +192,9 @@
   #};
 
   programs.direnv = {
-    enable = true;
+    enable = false;
     config = {
-      whitelist.prefix = ["/Users/nick/Source/universe" "/Users/nick/Source/expo"];
+      whitelist.prefix = [ "/Users/nick/Source/universe" "/Users/nick/Source/expo" ];
     };
   };
 
