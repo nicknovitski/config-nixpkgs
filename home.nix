@@ -22,7 +22,7 @@
   nixpkgs.config = import ./config.nix;
 
   home.packages = with pkgs;
-    [ fd gitAndTools.hub gnugrep jq ripgrep youtube-dl taskwarrior tasksh vscode ]
+    [ fd gitAndTools.gh gnugrep jq hledger hledger-web ripgrep youtube-dl taskwarrior tasksh vscode ]
     ++ [ fira-code inconsolata ]
     ++ [ macvim ];
 
