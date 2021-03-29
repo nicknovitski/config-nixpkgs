@@ -97,6 +97,9 @@
     enable = true;
     colorTheme = "solarized-dark-256";
     config = {
+      context = {
+        work = "+expo";
+      };
       taskd = {
         server = "freecinc.com:53589";
         key = "~/.local/share/task/freecinc.key.pem";
